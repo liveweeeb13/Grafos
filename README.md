@@ -28,4 +28,4 @@ You can customize the **keyboard shortcut** and the **maximum brush size**.
 ---
 
 Thank you for reading! 🙏
-Feel free to **try the extension** and send your feedback, even positive, directly in the [issues](https://github.com/liveweeeb13/Grafos/issues). Your input is valuable to help improve the extension!
+Feel free to **try the extension** and send your feedback, even positive, directly in the [issues](https://github.com/liveweeeb13/Grafos/issues) or in the [developer's support discord server ](https://discord.gg/ukJegYrXWR). Your input is valuable to help improve Grafos!
