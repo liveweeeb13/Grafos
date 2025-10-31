@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Grafos",
-  "version": "1.2",
+  "version": "1.3.1",
   "description": "Drawing on web pages",
   "author": "liveweeeb",
   "permissions": ["storage", "activeTab"],
@@ -22,7 +22,12 @@
     }
   ],
   "options_ui": {
-    "page": "options.html",
-    "open_in_tab": true
+    "page": "options.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "grafos@liveweeeb.com",
+      "strict_min_version": "109.0"
+    }
   }
 }

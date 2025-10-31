@@ -13,11 +13,13 @@
 3. Drag and drop the **.crx** file onto the extensions page.
 4. Click **Install** to confirm.
 
-### For Firefox
+### For Firefox (add to each launch)
 
 1. Download the **.xpi** file from the [latest release](https://github.com/liveweeeb13/Grafos/releases).
 2. Go to `about:debugging#/runtime/this-firefox`.
 3. Click **Load Temporary Add-on** and select the **.xpi** file.
+
+Ou pour l'installer a perpet
 
 ---
 

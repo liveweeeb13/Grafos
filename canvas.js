@@ -73,6 +73,9 @@ function setupEventListeners() {
     window.addEventListener("resize", resizeCanvas);
     graffitiCanvas.addEventListener("mousedown", startDraw);
     graffitiCanvas.addEventListener("mousemove", draw);
+    graffitiCanvas.addEventListener("mousemove", updateBrushPreview);
+    graffitiCanvas.addEventListener("mouseenter", updateBrushPreview);
+    graffitiCanvas.addEventListener("mouseleave", hideBrushPreview);
     window.addEventListener("mouseup", stopDraw);
     console.log("[GRAFOS] Event listeners configured");
 }

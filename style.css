@@ -1,4 +1,4 @@
-/* === Canvas principal === */
+/* === CANVAS === */
 #graffitiCanvasOverlay {
   position: absolute;
   top: 0;
@@ -11,7 +11,7 @@
   pointer-events: none;
 }
 
-/* === Fenêtre principale === */
+/* === FENÊTRE PRINCIPALE === */
 .graffiti-window {
   position: fixed;
   top: 100px;
@@ -28,7 +28,7 @@
   overflow: hidden;
 }
 
-/* === En-tête draggable === */
+/* === EN-TÊTE === */
 .graffiti-header {
   background: #2b2b2b;
   padding: 8px 10px;
@@ -53,7 +53,7 @@
   color: #ff5555;
 }
 
-/* === Conteneur des contrôles === */
+/* === CONTENEUR PRINCIPAL === */
 .graffiti-controls {
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@
   padding: 12px;
 }
 
-/* === Boutons d'outils === */
+/* === BOUTONS D'OUTILS === */
 .tool-buttons {
   display: flex;
   justify-content: space-between;
@@ -70,7 +70,7 @@
 
 .tool-buttons button {
   flex: 1;
-  padding: 8px;
+  padding: 12px 8px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -78,19 +78,27 @@
   color: #fff;
   font-weight: 600;
   transition: background 0.2s, transform 0.1s;
+  font-size: 20px; /* Taille des emojis */
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
 }
 
 .tool-buttons button:hover:not(.active) {
   background: #555;
 }
 
-.tool-buttons button.active {
-  background: #007acc;
-  box-shadow: 0 0 6px #007acc;
+.tool-buttons button.active, #textBtn.active{
+  background: #808080;
+  box-shadow: 0 0 6px #808080;
   transform: scale(1.03);
 }
 
-/* === Options des outils === */
+
+
+/* === OPTIONS D'OUTILS === */
 .tool-options {
   display: flex;
   flex-direction: column;
@@ -111,7 +119,6 @@
   font-size: 14px;
 }
 
-/* === Inputs et sélecteurs === */
 .tool-options input,
 .tool-options select,
 .tool-options button {
@@ -149,18 +156,114 @@
   width: 80px;
 }
 
-/* === Bouton "Effacer" === */
-.tool-options button#clearCanvas {
-  background: #c62828;
-  color: #fff;
+/* === OPTIONS TEXTE === */
+#textOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#textOptions input[type="number"] {
+  width: 80px;
+}
+
+#selectTextAreaBtn {
+  background: #007acc !important;
+  margin-top: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
   font-weight: bold;
 }
 
-.tool-options button#clearCanvas:hover {
+#selectTextAreaBtn:hover {
+  background: #0099ff !important;
+}
+
+/* === BOUTONS D'ACTION === */
+.action-buttons {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #444;
+}
+
+.action-buttons button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #c62828;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.action-buttons button:hover {
   background: #e53935;
 }
 
-/* === Responsive === */
+/* === POPUP DE TEXTE === */
+#textColorInput {
+  height: 30px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #1e1e1e;
+  cursor: pointer;
+}
+
+#textSizeInput, #textFontInput {
+  padding: 5px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #1e1e1e;
+  color: white;
+}
+
+#textSizeInput:focus, #textFontInput:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+/* Styles pour la prévisualisation de texte */
+#textPreview {
+  border: 1px solid #444;
+  background: #1a1a1a;
+  transition: all 0.2s ease;
+}
+
+#textPreview::-webkit-scrollbar {
+  width: 6px;
+}
+
+#textPreview::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+#textPreview::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 3px;
+}
+
+#textPreview::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* Animation pour la prévisualisation */
+@keyframes previewUpdate {
+  0% { background-color: #2e2e2e; }
+  50% { background-color: #3a3a3a; }
+  100% { background-color: #1a1a1a; }
+}
+
+.text-preview-update {
+  animation: previewUpdate 0.3s ease;
+}
+
+/* === RESPONSIVE === */
 @media (max-width: 400px) {
   .graffiti-window {
     width: 90%;

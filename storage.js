@@ -7,14 +7,6 @@ function saveDrawing() {
     try {
         console.log("[GRAFOS] Starting save process...");
         
-        const imageData = ctx.getImageData(0, 0, graffitiCanvas.width, graffitiCanvas.height);
-        const hasContent = imageData.data.some(channel => channel !== 0);
-        
-        if (!hasContent) {
-            console.log("[GRAFOS] Canvas is empty, skipping save");
-            return;
-        }
-        
         const existingData = localStorage.getItem(storageKey);
         savedData = existingData ? JSON.parse(existingData) : {};
         console.log(`[GRAFOS] Existing saved drawings: ${Object.keys(savedData).length}`);
@@ -68,14 +60,9 @@ function loadDrawing() {
             ctx.clearRect(0, 0, graffitiCanvas.width, graffitiCanvas.height);
             ctx.drawImage(img, 0, 0);
             console.log(`[GRAFOS] Drawing loaded successfully!`);
-            
-            const verifyData = ctx.getImageData(0, 0, 1, 1);
-            const hasContent = verifyData.data.some(channel => channel !== 0);
-            console.log(`[GRAFOS] Drawing verification: ${hasContent ? 'SUCCESS' : 'FAILED - canvas appears empty'}`);
         };
         img.onerror = function() {
             console.error("[GRAFOS] Error loading saved image");
-            console.error("[GRAFOS] Data URL preview:", dataURL.substring(0, 100) + "...");
         };
         img.src = dataURL;
         
@@ -90,7 +77,13 @@ function saveSettings() {
             currentColor, 
             brushSize, 
             brushShape, 
-            tool 
+            tool,
+            textColor,
+            fontSize, 
+            fontFamily,
+            isBold,
+            isItalic,
+            isUnderline
         };
         localStorage.setItem(settingsKey, JSON.stringify(settings));
         console.log("[GRAFOS] Settings saved:", settings);
@@ -108,13 +101,18 @@ function loadSettings() {
         if (settings.brushSize) brushSize = settings.brushSize;
         if (settings.brushShape) brushShape = settings.brushShape;
         if (settings.tool) tool = settings.tool;
+        if (settings.textColor) textColor = settings.textColor;
+        if (settings.fontSize) fontSize = settings.fontSize;
+        if (settings.fontFamily) fontFamily = settings.fontFamily;
+        if (settings.isBold !== undefined) isBold = settings.isBold;
+        if (settings.isItalic !== undefined) isItalic = settings.isItalic;
+        if (settings.isUnderline !== undefined) isUnderline = settings.isUnderline;
         
         console.log("[GRAFOS] Settings loaded:", settings);
     } catch (error) {
         console.error("[GRAFOS] Settings load error:", error);
     }
 }
-
 function loadShortcuts() {
     console.log("[GRAFOS] Loading keyboard shortcuts...");
     storageAPI.sync.get(["shortcut", "maxSize"]).then(
