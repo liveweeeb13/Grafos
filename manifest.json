@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Grafos",
+  "version": "1.2",
+  "description": "Drawing on web pages",
+  "author": "liveweeeb",
+  "permissions": ["storage", "activeTab"],
+  "icons": { "128": "icon.png" },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "core.js",
+        "canvas.js", 
+        "drawing.js",
+        "storage.js",
+        "ui.js",
+        "main.js"
+      ],
+      "css": ["style.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Grafos settings</title>
+<link rel="stylesheet" href="options.css">
+
+</head>
+<body>
+<h2>Grafos settings</h2>
+
+<form>
+  <label>
+    Shortcut to open the window:
+    <input type="text" id="shortcut" placeholder="Click here and press the keys" readonly>
+  </label>
+
+  <label>
+    Maximum brush size:
+    <input type="number" id="maxSize" min="1" max="5000" value="2000">
+  </label>
+
+  <button id="saveBtn">Submit</button>
+</form>
+
+<script src="options.js"></script>
+</body>
+</html>
