@@ -1,162 +1,4 @@
-function createControlWindow() {
-    if (graffitiWindow) {
-        console.log("[GRAFOS] Control window already exists");
-        return;
-    }
-
-    console.log("[GRAFOS] Creating control window...");
-
-    graffitiWindow = document.createElement("div");
-    graffitiWindow.className = "graffiti-window";
-    graffitiWindow.innerHTML = `
-        <div class="graffiti-header">
-            🎨 Grafos
-            <button id="closeGraffiti">✖</button>
-        </div>
-        <div class="graffiti-controls">
-            <div class="tool-buttons">
-                <button id="pencilBtn" class="${tool==='pencil'?'active':''}">🖌️</button>
-                <button id="eraserBtn" class="${tool==='eraser'?'active':''}">🧽</button>
-                <button id="textBtn" class="${tool==='text'?'active':''}">🔠</button>
-            </div>
-            
-            <div class="tool-options" id="drawingOptions" style="${tool==='text'?'display:none;':''}">
-                <div id="colorOption">
-                    <label>Color:</label>
-                    <input type="color" id="colorPicker" value="${currentColor}">
-                </div>
-                <div>
-                    <label>Size:</label>
-                    <input list="sizeList" id="sizeInput" value="${brushSize}" min="1" max="${maxBrushSize}">
-                    <datalist id="sizeList">
-                        <option value="1"><option value="3"><option value="5">
-                        <option value="10"><option value="15"><option value="20">
-                    </datalist>
-                </div>
-                <div>
-                    <label>Shape:</label>
-                    <select id="brushShape">
-                        <option value="round" ${brushShape==="round"?"selected":""}>Round</option>
-                        <option value="square" ${brushShape==="square"?"selected":""}>Square</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="tool-options" id="textOptions" style="${tool!=='text'?'display:none;':''}">
-                <button id="selectTextAreaBtn">Select Text Area</button>
-            </div>
-            
-            <div class="action-buttons">
-                <button id="clearCanvas">Clear all</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(graffitiWindow);
-
-    // Tool events
-    graffitiWindow.querySelector("#pencilBtn").addEventListener("click", () => selectTool("pencil"));
-    graffitiWindow.querySelector("#eraserBtn").addEventListener("click", () => selectTool("eraser"));
-    graffitiWindow.querySelector("#textBtn").addEventListener("click", () => selectTool("text"));
-    
-    // Drawing events
-    graffitiWindow.querySelector("#colorPicker").addEventListener("input", e => { 
-        currentColor = e.target.value; 
-        saveSettings(); 
-    });
-    graffitiWindow.querySelector("#sizeInput").addEventListener("input", e => {
-        let val = parseInt(e.target.value);
-        if (!isNaN(val) && val >= 1 && val <= maxBrushSize) brushSize = val;
-        saveSettings();
-    });
-    graffitiWindow.querySelector("#brushShape").addEventListener("change", e => { 
-        brushShape = e.target.value; 
-        saveSettings(); 
-    });
-    
-    // Text events
-    graffitiWindow.querySelector("#selectTextAreaBtn").addEventListener("click", startTextAreaSelection);
-    
-    graffitiWindow.querySelector("#clearCanvas").addEventListener("click", clearCanvas);
-    graffitiWindow.querySelector("#closeGraffiti").addEventListener("click", closeControlWindow);
-
-    makeDraggable(graffitiWindow.querySelector(".graffiti-header"), graffitiWindow);
-
-    updateToolUI();
-    canDraw = true;
-    updateCanvasPointer();
-    
-    console.log("[GRAFOS] Control window created successfully");
-
-    function selectTool(selected) {
-        // Reset text selection if switching tools
-        if (tool === "text" && selected !== "text") {
-            resetTextAreaSelection();
-        }
-        
-        tool = selected;
-        updateToolUI();
-        saveSettings();
-        hideBrushPreview();
-        console.log(`[GRAFOS] Tool selected: ${tool}`);
-    }
-
-    function updateToolUI() {
-        const pencilBtn = graffitiWindow.querySelector("#pencilBtn");
-        const eraserBtn = graffitiWindow.querySelector("#eraserBtn");
-        const textBtn = graffitiWindow.querySelector("#textBtn");
-        const drawingOptions = graffitiWindow.querySelector("#drawingOptions");
-        const textOptions = graffitiWindow.querySelector("#textOptions");
-        const colorOption = graffitiWindow.querySelector("#colorOption");
-        
-        pencilBtn.classList.toggle("active", tool==="pencil");
-        eraserBtn.classList.toggle("active", tool==="eraser");
-        textBtn.classList.toggle("active", tool==="text");
-        
-        // Show/hide options sections
-        drawingOptions.style.display = tool==="text" ? "none" : "flex";
-        textOptions.style.display = tool==="text" ? "flex" : "none";
-        
-        // Hide color option for eraser
-        colorOption.style.display = tool==="eraser" ? "none" : "flex";
-    }
-}
-
-// Other functions remain unchanged...
-function startTextAreaSelection() {
-    if (tool !== "text") return;
-    
-    isSelectingTextArea = true;
-    graffitiCanvas.style.cursor = "crosshair";
-    console.log("[GRAFOS] Text area selection mode activated - click and drag to select");
-    
-    // Temporary message
-    const message = document.createElement("div");
-    message.textContent = "Click and drag to select text area";
-    message.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0,0,0,0.8);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        z-index: 100001;
-        pointer-events: none;
-    `;
-    message.id = "textAreaMessage";
-    document.body.appendChild(message);
-    
-    setTimeout(() => {
-        const msg = document.getElementById("textAreaMessage");
-        if (msg) msg.remove();
-    }, 2000);
-    
-    // Clean up any existing preview
-    const oldPreview = document.getElementById("textAreaPreview");
-    if (oldPreview) oldPreview.remove();
-}
-
+// Éditeur de texte avancé pour l'extension Grafos
 function showTextInput(rect) {
     const textInputOverlay = document.createElement("div");
     textInputOverlay.style.cssText = `
@@ -387,7 +229,7 @@ function showTextInput(rect) {
     textInputOverlay.appendChild(textInputBox);
     document.body.appendChild(textInputOverlay);
 
-    // Add custom styles for the resize handle and interactions
+    // Styles CSS pour l'éditeur de texte
     const style = document.createElement('style');
     style.textContent = `
         .graffiti-text-box {
@@ -514,15 +356,15 @@ function showTextInput(rect) {
     
     textInput.focus();
 
-    // Function to handle responsive layout
+    // Gestion du layout responsive
     function updateLayout() {
         const boxWidth = textInputBox.clientWidth;
         
-        // Update current max width display
+        // Mise à jour de la largeur maximale affichée
         const previewMaxWidth = boxWidth - 60;
         currentMaxWidth.textContent = Math.round(previewMaxWidth - 20);
         
-        // Adjust grid layout based on available width
+        // Ajustement du layout grid selon la largeur disponible
         const gridContainer = textInputBox.querySelector('div[style*="grid-template-columns"]');
         const fullWidthItem = textInputBox.querySelector('div[style*="grid-column: span 2"]');
         
@@ -542,7 +384,7 @@ function showTextInput(rect) {
             }
         }
 
-        // Adjust button layout for small screens
+        // Ajustement des boutons pour petits écrans
         const buttonContainer = textInputBox.querySelector('div[style*="justify-content: flex-end"]');
         if (buttonContainer) {
             if (boxWidth < 350) {
@@ -554,20 +396,20 @@ function showTextInput(rect) {
             }
         }
 
-        // Update text preview to reflect new dimensions
+        // Mise à jour de la prévisualisation avec les nouvelles dimensions
         updateTextPreview();
     }
 
-    // Function to update text preview
+    // Mise à jour de la prévisualisation du texte
     function updateTextPreview() {
         const text = textInput.value;
         const previewMaxWidth = textInputBox.clientWidth - 60;
         
-        // Update character count
+        // Mise à jour du compteur de caractères
         charCount.textContent = `${text.length}/500`;
         charCount.style.color = text.length > 450 ? '#ff6b6b' : text.length > 400 ? '#ffa726' : '#888';
         
-        // Update preview appearance
+        // Mise à jour de l'apparence de la prévisualisation
         textPreview.style.color = textColor;
         textPreview.style.fontSize = fontSize + 'px';
         textPreview.style.fontFamily = fontFamily;
@@ -581,12 +423,12 @@ function showTextInput(rect) {
         } else {
             textPreview.innerHTML = '';
             
-            // Simulate rendering with line breaks and Markdown formatting
+            // Simulation du rendu avec retours à la ligne et formatage Markdown
             const tempCanvas = document.createElement('canvas');
             const tempCtx = tempCanvas.getContext('2d');
             tempCtx.font = `${fontSize}px ${fontFamily}`;
             
-            // Parse Markdown to create formatted segments
+            // Parsing Markdown pour créer des segments formatés
             function parseMarkdownForPreview(text) {
                 const segments = [];
                 let currentText = '';
@@ -599,7 +441,7 @@ function showTextInput(rect) {
                 
                 let i = 0;
                 while (i < text.length) {
-                    // Check for bold **text**
+                    // Vérification du gras **text**
                     if (text.substr(i, 2) === '**' && !currentStyles.bold) {
                         if (currentText) {
                             segments.push({ text: currentText, styles: { ...currentStyles } });
@@ -615,7 +457,7 @@ function showTextInput(rect) {
                         currentStyles.bold = false;
                         i += 2;
                     } 
-                    // Check for italic *text*
+                    // Vérification de l'italique *text*
                     else if (text.substr(i, 1) === '*' && !currentStyles.italic && 
                              (i === text.length - 1 || text[i + 1] !== '*')) {
                         if (currentText) {
@@ -633,7 +475,7 @@ function showTextInput(rect) {
                         currentStyles.italic = false;
                         i += 1;
                     } 
-                    // Check for underline __text__
+                    // Vérification du soulignement __text__
                     else if (text.substr(i, 2) === '__' && !currentStyles.underline) {
                         if (currentText) {
                             segments.push({ text: currentText, styles: { ...currentStyles } });
@@ -649,7 +491,7 @@ function showTextInput(rect) {
                         currentStyles.underline = false;
                         i += 2;
                     }
-                    // Check for strikethrough ~~text~~
+                    // Vérification du barré ~~text~~
                     else if (text.substr(i, 2) === '~~' && !currentStyles.strikethrough) {
                         if (currentText) {
                             segments.push({ text: currentText, styles: { ...currentStyles } });
@@ -677,13 +519,13 @@ function showTextInput(rect) {
                 return segments;
             }
             
-            // Process each line
+            // Traitement de chaque ligne
             const lines = text.split('\n');
             const wrappedLines = [];
             const previewHeight = textPreview.clientHeight;
             const maxLines = Math.floor(previewHeight / (fontSize * 1.4));
             
-            // Calculate line breaks with formatted segments
+            // Calcul des retours à la ligne avec segments formatés
             lines.forEach(line => {
                 const segments = parseMarkdownForPreview(line);
                 let currentLine = [];
@@ -697,7 +539,7 @@ function showTextInput(rect) {
                         const wordWidth = measureTextWidth(wordWithSpace, segment.styles);
                         
                         if (currentLineWidth + wordWidth > previewMaxWidth && currentLine.length > 0) {
-                            // New line
+                            // Nouvelle ligne
                             wrappedLines.push([...currentLine]);
                             currentLine = [];
                             currentLineWidth = 0;
@@ -716,7 +558,7 @@ function showTextInput(rect) {
                 }
             });
             
-            // Function to measure text width with styles
+            // Fonction pour mesurer la largeur du texte avec styles
             function measureTextWidth(text, styles) {
                 const tempCanvas = document.createElement('canvas');
                 const tempCtx = tempCanvas.getContext('2d');
@@ -730,7 +572,7 @@ function showTextInput(rect) {
                 return tempCtx.measureText(text).width;
             }
             
-            // Display lines with height limit
+            // Affichage des lignes avec limite de hauteur
             const displayLines = wrappedLines.slice(0, maxLines);
             
             displayLines.forEach(lineSegments => {
@@ -758,10 +600,10 @@ function showTextInput(rect) {
                 textPreview.appendChild(lineElement);
             });
             
-            // Update line count
+            // Mise à jour du compteur de lignes
             lineCount.textContent = `Lines: ${displayLines.length}${wrappedLines.length > maxLines ? '+' : ''}`;
             
-            // Warning if text exceeds height
+            // Avertissement si le texte dépasse la hauteur
             if (wrappedLines.length > maxLines) {
                 const warning = document.createElement('div');
                 warning.textContent = `... (${wrappedLines.length - maxLines} more lines won't fit)`;
@@ -774,7 +616,7 @@ function showTextInput(rect) {
         }
     }
 
-    // Events for text controls
+    // Événements pour les contrôles de texte
     textColorInput.addEventListener("input", e => {
         textColor = e.target.value;
         saveSettings();
@@ -796,14 +638,14 @@ function showTextInput(rect) {
         updateTextPreview();
     });
     
-    // Events for text input
+    // Événements pour la saisie de texte
     textInput.addEventListener("input", updateTextPreview);
     
-    // Update layout on resize
+    // Mise à jour du layout au redimensionnement
     const resizeObserver = new ResizeObserver(updateLayout);
     resizeObserver.observe(textInputBox);
     
-    // Initial layout update
+    // Mise à jour initiale du layout
     updateLayout();
     
     textInputBox.querySelector("#cancelText").addEventListener("click", () => {
@@ -821,7 +663,7 @@ function showTextInput(rect) {
         textInputOverlay.remove();
     });
     
-    // Close with ESC
+    // Fermeture avec ESC
     textInputOverlay.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             resizeObserver.disconnect();
@@ -830,7 +672,7 @@ function showTextInput(rect) {
         }
     });
 
-    // Ensure the dialog is scrollable and resizable
+    // Assurer que la boîte de dialogue est scrollable et redimensionnable
     setTimeout(() => {
         textInputBox.style.overflow = 'auto';
         textInputBox.style.resize = 'both';
@@ -840,18 +682,18 @@ function showTextInput(rect) {
 function drawTextOnCanvas(text, rect) {
     if (!ctx) return;
     
-    // Reset default styles
+    // Réinitialisation des styles par défaut
     ctx.fillStyle = textColor;
     ctx.font = `${fontSize}px ${fontFamily}`;
     ctx.textBaseline = "top";
     
-    // Calculate text positioning in the area
+    // Calcul du positionnement du texte dans la zone
     const lines = text.split('\n');
     const lineHeight = fontSize * 1.4;
     const maxWidth = rect.width - 10;
     const maxHeight = rect.height - 10;
     
-    // Function to parse Markdown formatting
+    // Fonction pour parser le formatage Markdown
     function parseMarkdownText(text) {
         const segments = [];
         let currentText = '';
@@ -863,7 +705,7 @@ function drawTextOnCanvas(text, rect) {
         
         let i = 0;
         while (i < text.length) {
-            // Check for bold **text**
+            // Vérification du gras **text**
             if (text.substr(i, 2) === '**' && !currentStyles.bold) {
                 if (currentText) {
                     segments.push({ text: currentText, styles: { ...currentStyles } });
@@ -879,7 +721,7 @@ function drawTextOnCanvas(text, rect) {
                 currentStyles.bold = false;
                 i += 2;
             } 
-            // Check for italic *text*
+            // Vérification de l'italique *text*
             else if (text.substr(i, 1) === '*' && !currentStyles.italic && 
                      (i === text.length - 1 || text[i + 1] !== '*')) {
                 if (currentText) {
@@ -897,7 +739,7 @@ function drawTextOnCanvas(text, rect) {
                 currentStyles.italic = false;
                 i += 1;
             } 
-            // Check for underline __text__
+            // Vérification du soulignement __text__
             else if (text.substr(i, 2) === '__' && !currentStyles.underline) {
                 if (currentText) {
                     segments.push({ text: currentText, styles: { ...currentStyles } });
@@ -925,7 +767,7 @@ function drawTextOnCanvas(text, rect) {
         return segments;
     }
     
-    // Function to measure text width with styles
+    // Fonction pour mesurer la largeur du texte avec styles
     function measureTextWidth(text, styles) {
         const tempCanvas = document.createElement('canvas');
         const tempCtx = tempCanvas.getContext('2d');
@@ -939,9 +781,9 @@ function drawTextOnCanvas(text, rect) {
         return tempCtx.measureText(text).width;
     }
     
-    // Function to draw a text segment with its styles
+    // Fonction pour dessiner un segment de texte avec ses styles
     function drawTextSegment(text, x, y, styles) {
-        // Apply styles
+        // Application des styles
         let fontString = '';
         if (styles.bold) fontString += 'bold ';
         if (styles.italic) fontString += 'italic ';
@@ -950,10 +792,10 @@ function drawTextOnCanvas(text, rect) {
         ctx.font = fontString;
         ctx.fillStyle = textColor;
         
-        // Draw text
+        // Dessin du texte
         ctx.fillText(text, x, y);
         
-        // Draw underline if needed
+        // Dessin du soulignement si nécessaire
         if (styles.underline) {
             const textWidth = measureTextWidth(text, styles);
             ctx.strokeStyle = textColor;
@@ -967,7 +809,7 @@ function drawTextOnCanvas(text, rect) {
         return measureTextWidth(text, styles);
     }
     
-    // Process each line
+    // Traitement de chaque ligne
     const allLines = [];
     
     lines.forEach(line => {
@@ -989,7 +831,7 @@ function drawTextOnCanvas(text, rect) {
                 const wordWidth = measureTextWidth(wordWithSpace, segment.styles);
                 
                 if (currentLineWidth + wordWidth > maxWidth && currentLine.length > 0) {
-                    // New line
+                    // Nouvelle ligne
                     lineSegments.push([...currentLine]);
                     currentLine = [];
                     currentLineWidth = 0;
@@ -1010,11 +852,11 @@ function drawTextOnCanvas(text, rect) {
         allLines.push(...lineSegments);
     });
     
-    // Limit number of lines based on available height
+    // Limite du nombre de lignes selon la hauteur disponible
     const maxLines = Math.floor(maxHeight / lineHeight);
     const finalLines = allLines.slice(0, maxLines);
     
-    // Draw text
+    // Dessin du texte
     const startX = rect.left + 5;
     let startY = rect.top + 5;
     
@@ -1033,81 +875,4 @@ function drawTextOnCanvas(text, rect) {
     
     saveDrawing();
     console.log(`[GRAFOS] Formatted text added to canvas: ${finalLines.length} lines`);
-}
-
-function closeControlWindow() {
-    if (graffitiWindow) {
-        graffitiWindow.remove();
-        graffitiWindow = null;
-    }
-    canDraw = false;
-    updateCanvasPointer();
-    hideBrushPreview();
-    
-    // Completely reset text selection
-    resetTextAreaSelection();
-    
-    console.log("[GRAFOS] Control window closed");
-}
-
-function clearCanvas() {
-    if (!ctx) {
-        console.log("[GRAFOS] Cannot clear - context not available");
-        return;
-    }
-
-    console.log("[GRAFOS] Initializing canvas clear...");
-
-    const confirmOverlay = document.createElement("div");
-    confirmOverlay.style.cssText = `
-        position: fixed; top: 0; left: 0; 
-        width: 100%; height: 100%; 
-        background: rgba(0,0,0,0.8); 
-        display: flex; align-items: center; justify-content: center; 
-        z-index: 99999;
-    `;
-
-    const confirmBox = document.createElement("div");
-    confirmBox.style.cssText = `
-        background: #1e1e1e; padding: 30px 40px; border-radius: 12px; 
-        text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    `;
-    confirmBox.innerHTML = `
-        <p style="font-size: 1.2em; margin-bottom: 20px; color:white;">
-            Are you sure you want to clear the whole canvas?
-        </p>
-        <button id="confirmYes" style="margin-right:10px; padding:10px 20px; border:none; border-radius:6px; background:#ff4b5c; color:white; cursor:pointer;">Yes</button>
-        <button id="confirmNo" style="padding:10px 20px; border:none; border-radius:6px; background:#555; color:white; cursor:pointer;">No</button>
-    `;
-
-    confirmOverlay.appendChild(confirmBox);
-    document.body.appendChild(confirmOverlay);
-
-    confirmOverlay.querySelector("#confirmYes").addEventListener("click", () => {
-        console.log("[GRAFOS] User confirmed canvas clear");
-        ctx.clearRect(0, 0, graffitiCanvas.width, graffitiCanvas.height);
-        saveDrawing();
-        confirmOverlay.remove();
-        console.log("[GRAFOS] Canvas cleared and saved");
-    });
-
-    confirmOverlay.querySelector("#confirmNo").addEventListener("click", () => {
-        console.log("[GRAFOS] User cancelled canvas clear");
-        confirmOverlay.remove();
-    });
-}
-
-function makeDraggable(header, element) {
-    let offsetX, offsetY, dragging = false;
-    header.addEventListener("mousedown", e => {
-        dragging = true;
-        offsetX = e.clientX - element.offsetLeft;
-        offsetY = e.clientY - element.offsetTop;
-    });
-    document.addEventListener("mousemove", e => {
-        if (!dragging) return;
-        element.style.left = (e.clientX - offsetX) + "px";
-        element.style.top = (e.clientY - offsetY) + "px";
-    });
-    document.addEventListener("mouseup", () => dragging = false);
 }

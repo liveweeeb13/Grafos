@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Grafos",
-  "version": "1.3.1",
+  "version": "1.4",
   "description": "Drawing on web pages",
   "author": "liveweeeb",
   "permissions": ["storage", "activeTab"],
@@ -10,14 +10,19 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-        "core.js",
-        "canvas.js", 
-        "drawing.js",
-        "storage.js",
-        "ui.js",
-        "main.js"
+        "core/core.js",
+        "canvas/canvas.js",
+        "canvas/drawing.js",
+        "storage/storage.js",
+        "tools/brush.js",
+        "tools/eraser.js",
+        "tools/text.js",
+        "ui/controls.js",
+        "ui/text-editor.js",
+        "ui/draggable.js",
+        "ui/main.js"
       ],
-      "css": ["style.css"],
+      "css": ["styles/style.css"],
       "run_at": "document_idle"
     }
   ],

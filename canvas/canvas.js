@@ -1,3 +1,4 @@
+// Gestion du canvas principal
 function createCanvas() {
     if (graffitiCanvas) {
         console.log("[GRAFOS] Canvas already exists");
@@ -78,11 +79,4 @@ function setupEventListeners() {
     graffitiCanvas.addEventListener("mouseleave", hideBrushPreview);
     window.addEventListener("mouseup", stopDraw);
     console.log("[GRAFOS] Event listeners configured");
-}
-
-function updateCanvasPointer() {
-    if (graffitiCanvas) {
-        graffitiCanvas.style.pointerEvents = canDraw ? "auto" : "none";
-        console.log(`[GRAFOS] Canvas pointer events: ${graffitiCanvas.style.pointerEvents}`);
-    }
 }

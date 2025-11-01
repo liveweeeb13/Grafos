@@ -1,0 +1,1 @@
+// (Pour l'instant, la gomme utilise les mêmes fonctions que le pinceau)

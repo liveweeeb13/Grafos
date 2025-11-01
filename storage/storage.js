@@ -1,3 +1,4 @@
+// Gestion du stockage des données
 function saveDrawing() {
     if (!graffitiCanvas || !ctx) {
         console.log("[GRAFOS] Canvas not ready for saving");
@@ -113,6 +114,7 @@ function loadSettings() {
         console.error("[GRAFOS] Settings load error:", error);
     }
 }
+
 function loadShortcuts() {
     console.log("[GRAFOS] Loading keyboard shortcuts...");
     storageAPI.sync.get(["shortcut", "maxSize"]).then(
