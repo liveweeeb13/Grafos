@@ -19,7 +19,6 @@
 2. Go to `about:debugging#/runtime/this-firefox`.
 3. Click **Load Temporary Add-on** and select the **.xpi** file.
 
-Ou pour l'installer a perpet
 
 ---
 
