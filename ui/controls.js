@@ -1,4 +1,3 @@
-// Interface utilisateur principale
 function createControlWindow() {
     if (graffitiWindow) {
         console.log("[GRAFOS] Control window already exists");
@@ -54,12 +53,10 @@ function createControlWindow() {
     `;
     document.body.appendChild(graffitiWindow);
 
-    // Événements des outils
     graffitiWindow.querySelector("#pencilBtn").addEventListener("click", () => selectTool("pencil"));
     graffitiWindow.querySelector("#eraserBtn").addEventListener("click", () => selectTool("eraser"));
     graffitiWindow.querySelector("#textBtn").addEventListener("click", () => selectTool("text"));
     
-    // Événements de dessin
     graffitiWindow.querySelector("#colorPicker").addEventListener("input", e => { 
         currentColor = e.target.value; 
         saveSettings(); 
@@ -74,7 +71,6 @@ function createControlWindow() {
         saveSettings(); 
     });
     
-    // Événements texte
     graffitiWindow.querySelector("#selectTextAreaBtn").addEventListener("click", startTextAreaSelection);
     
     graffitiWindow.querySelector("#clearCanvas").addEventListener("click", clearCanvas);

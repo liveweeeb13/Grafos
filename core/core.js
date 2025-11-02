@@ -1,4 +1,3 @@
-// Variables globales et configuration de base
 let graffitiCanvas, ctx, isDrawing = false;
 let currentColor = "#ff0000";
 let brushSize = 5;
@@ -17,7 +16,6 @@ let isUnderline = false;
 let userShortcut = "Ctrl+Alt+P";
 let maxBrushSize = 2000;
 
-// Variables pour le texte
 let textColor = "#ff0000";
 let fontSize = 16;
 let fontFamily = "Arial";
@@ -26,7 +24,6 @@ let fontFamily = "Arial";
 const browserAPI = window.browser || window.chrome;
 const storageAPI = (typeof browser !== "undefined" ? browser.storage : chrome.storage);
 
-// Fonctions utilitaires
 function darkenColor(color, percent) {
     const num = parseInt(color.replace("#", ""), 16);
     const amt = Math.round(2.55 * percent);
@@ -43,7 +40,6 @@ function updateCanvasPointer() {
     }
 }
 
-// Ajouter ces variables avec les autres variables globales :
 let imageElements = [];
 let currentImageElement = null;
 let isDraggingImage = false;

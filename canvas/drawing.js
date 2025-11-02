@@ -1,4 +1,3 @@
-// Fonctions de dessin principal
 let brushPreview = null;
 let isSelectingTextArea = false;
 let textAreaStart = { x: 0, y: 0 };

@@ -1,4 +1,3 @@
-// Point d'entrée principal de l'extension
 function initializeExtension() {
     console.log("[GRAFOS] Initializing extension...");
     console.log("[GRAFOS] Current URL:", location.href);
@@ -10,7 +9,6 @@ function initializeExtension() {
     console.log("[GRAFOS] Extension initialized successfully");
 }
 
-// Gestionnaire de raccourcis clavier
 document.addEventListener("keydown", e => {
     if(!userShortcut) return;
 
@@ -41,7 +39,6 @@ if (document.readyState === 'loading') {
     initializeExtension();
 }
 
-// Observateur de redimensionnement
 const resizeObserver = new ResizeObserver(() => {
     if (graffitiCanvas) {
         console.log("[GRAFOS] Page content resized");

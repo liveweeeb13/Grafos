@@ -1,4 +1,3 @@
-// Fonctions spécifiques au pinceau
 function updateBrushPreview(e) {
     if (!canDraw || isDrawing || tool === "text") {
         hideBrushPreview();

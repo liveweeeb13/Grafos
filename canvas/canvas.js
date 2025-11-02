@@ -1,4 +1,3 @@
-// Gestion du canvas principal
 function createCanvas() {
     if (graffitiCanvas) {
         console.log("[GRAFOS] Canvas already exists");

@@ -1,4 +1,3 @@
-// Fonctions spécifiques au texte
 function drawTextAreaPreview() {
     const oldPreview = document.getElementById("textAreaPreview");
     if (oldPreview) oldPreview.remove();

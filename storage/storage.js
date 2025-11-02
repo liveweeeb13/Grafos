@@ -1,4 +1,3 @@
-// Gestion du stockage des données
 function saveDrawing() {
     if (!graffitiCanvas || !ctx) {
         console.log("[GRAFOS] Canvas not ready for saving");

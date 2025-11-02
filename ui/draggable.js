@@ -1,4 +1,3 @@
-// Fonctions pour rendre les éléments déplaçables
 function makeDraggable(header, element) {
     let offsetX, offsetY, dragging = false;
     header.addEventListener("mousedown", e => {

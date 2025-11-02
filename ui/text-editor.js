@@ -1,4 +1,3 @@
-// Éditeur de texte avancé pour l'extension Grafos
 function showTextInput(rect) {
     const textInputOverlay = document.createElement("div");
     textInputOverlay.style.cssText = `
@@ -15,7 +14,7 @@ function showTextInput(rect) {
         padding: 20px;
         box-sizing: border-box;
     `;
-    
+
     const textInputBox = document.createElement("div");
     textInputBox.style.cssText = `
         background: #2e2e2e;
@@ -35,7 +34,7 @@ function showTextInput(rect) {
         border: 1px solid #444;
         position: relative;
     `;
-    
+
     textInputBox.innerHTML = `
         <!-- Top bar with gradient -->
         <div style="
@@ -66,23 +65,30 @@ function showTextInput(rect) {
             <h4 style="color: #0099ff; margin: 0 0 10px 0; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
                 <span style="font-size: 16px;">📝</span> Formatting Guide
             </h4>
-            <div style="color: #ccc; font-size: 12px; line-height: 1.5;">
-                <div style="display: flex; align-items: center; margin-bottom: 4px;">
-                    <span style="display: inline-block; width: 80px; font-weight: bold; color: #fff;">Bold:</span>
-                    <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; border: 1px solid #444; font-family: 'Courier New', monospace;">**text**</code>
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 4px;">
-                    <span style="display: inline-block; width: 80px; font-weight: bold; color: #fff;">Italic:</span>
-                    <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; border: 1px solid #444; font-family: 'Courier New', monospace;">*text*</code>
-                </div>
-                <div style="display: flex; align-items: center; margin-bottom: 4px;">
-                    <span style="display: inline-block; width: 80px; font-weight: bold; color: #fff;">Underline:</span>
-                    <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; border: 1px solid #444; font-family: 'Courier New', monospace;">__text__</code>
-                </div>
-                <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444; font-style: italic; color: #aaa; font-size: 11px;">
-                    Select text and apply formatting manually using the syntax above
-                </div>
-            </div>
+<div style="color: #ccc; font-size: 12px; line-height: 1.5;">
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+        <div style="display: flex; align-items: center;">
+            <span style="display: inline-block; width: 80px; font-weight: bold; color: #fff;">Bold:</span>
+            <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; border: 1px solid #444; font-family: 'Courier New', monospace;">**text**</code>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span style="display: inline-block; width: 80px; font-weight: bold; color: #fff;">Italic:</span>
+            <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; border: 1px solid #444; font-family: 'Courier New', monospace;">*text*</code>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span style="display: inline-block; width: 80px; font-weight: bold; color: #fff;">Underline:</span>
+            <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; border: 1px solid #444; font-family: 'Courier New', monospace;">__text__</code>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span style="display: inline-block; width: 80px; font-weight: bold; color: #fff;">Strikethrough:</span>
+            <code style="background: #1a1a1a; padding: 2px 6px; border-radius: 4px; border: 1px solid #444; font-family: 'Courier New', monospace;">~~text~~</code>
+        </div>
+    </div>
+    <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444; font-style: italic; color: #aaa; font-size: 11px;">
+        Select text and apply formatting manually using the syntax above
+    </div>
+</div>
+
         </div>
         
         <!-- Text area -->
@@ -101,7 +107,7 @@ function showTextInput(rect) {
                 color: white; 
                 resize: vertical; 
                 font-family: ${fontFamily}; 
-                font-size: ${fontSize}px; 
+                font-size: 28px 
                 line-height: 1.4; 
                 box-sizing: border-box;
                 transition: all 0.2s ease;
@@ -185,12 +191,12 @@ function showTextInput(rect) {
                     background-size: 16px;
                     padding-right: 35px;
                 ">
-                    <option value="Arial" ${fontFamily==="Arial"?"selected":""}>Arial</option>
-                    <option value="Verdana" ${fontFamily==="Verdana"?"selected":""}>Verdana</option>
-                    <option value="Georgia" ${fontFamily==="Georgia"?"selected":""}>Georgia</option>
-                    <option value="Times New Roman" ${fontFamily==="Times New Roman"?"selected":""}>Times New Roman</option>
-                    <option value="Courier New" ${fontFamily==="Courier New"?"selected":""}>Courier New</option>
-                    <option value="Comic Sans MS" ${fontFamily==="Comic Sans MS"?"selected":""}>Comic Sans MS</option>
+                    <option value="Arial" ${fontFamily === "Arial" ? "selected" : ""}>Arial</option>
+                    <option value="Verdana" ${fontFamily === "Verdana" ? "selected" : ""}>Verdana</option>
+                    <option value="Georgia" ${fontFamily === "Georgia" ? "selected" : ""}>Georgia</option>
+                    <option value="Times New Roman" ${fontFamily === "Times New Roman" ? "selected" : ""}>Times New Roman</option>
+                    <option value="Courier New" ${fontFamily === "Courier New" ? "selected" : ""}>Courier New</option>
+                    <option value="Comic Sans MS" ${fontFamily === "Comic Sans MS" ? "selected" : ""}>Comic Sans MS</option>
                 </select>
             </div>
         </div>
@@ -225,11 +231,10 @@ function showTextInput(rect) {
             ">Add Text</button>
         </div>
     `;
-    
+
     textInputOverlay.appendChild(textInputBox);
     document.body.appendChild(textInputOverlay);
 
-    // Styles CSS pour l'éditeur de texte
     const style = document.createElement('style');
     style.textContent = `
         .graffiti-text-box {
@@ -254,7 +259,6 @@ function showTextInput(rect) {
             background: linear-gradient(135deg, transparent 40%, #00ccff 40%, #00ccff 60%, transparent 60%, transparent 70%, #00ccff 70%, #00ccff 80%, transparent 80%);
         }
         
-        /* Custom scrollbar for the entire dialog */
         .graffiti-text-box::-webkit-scrollbar {
             width: 12px;
             height: 12px;
@@ -279,7 +283,6 @@ function showTextInput(rect) {
             background: #2e2e2e;
         }
         
-        /* Custom scrollbar for the preview */
         #textPreview::-webkit-scrollbar {
             width: 8px;
         }
@@ -298,13 +301,11 @@ function showTextInput(rect) {
             background: #0099ff;
         }
         
-        /* Input focus effects */
         #textInput:focus, #fontSizeInput:focus, #fontFamilySelect:focus {
             border-color: #007acc;
             box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
         }
         
-        /* Button hover effects */
         #cancelText:hover {
             background: linear-gradient(135deg, #666 0%, #555 100%);
             transform: translateY(-1px);
@@ -321,23 +322,19 @@ function showTextInput(rect) {
             transform: translateY(0px);
         }
         
-        /* Ensure resize works properly */
         .graffiti-text-box {
             overflow: auto !important;
         }
         
-        /* Fix for Firefox resize */
         .graffiti-text-box {
             resize: both;
             overflow: auto;
         }
         
-        /* Make sure content doesn't get cut off */
         .graffiti-text-box > * {
             min-width: 0;
         }
         
-        /* Remove draggable cursor from header */
         h3 {
             cursor: default !important;
         }
@@ -353,21 +350,18 @@ function showTextInput(rect) {
     const textColorInput = textInputBox.querySelector("#textColorInput");
     const fontSizeInput = textInputBox.querySelector("#fontSizeInput");
     const fontFamilySelect = textInputBox.querySelector("#fontFamilySelect");
-    
+
     textInput.focus();
 
-    // Gestion du layout responsive
     function updateLayout() {
         const boxWidth = textInputBox.clientWidth;
-        
-        // Mise à jour de la largeur maximale affichée
+
         const previewMaxWidth = boxWidth - 60;
         currentMaxWidth.textContent = Math.round(previewMaxWidth - 20);
-        
-        // Ajustement du layout grid selon la largeur disponible
+
         const gridContainer = textInputBox.querySelector('div[style*="grid-template-columns"]');
         const fullWidthItem = textInputBox.querySelector('div[style*="grid-column: span 2"]');
-        
+
         if (boxWidth < 450) {
             if (gridContainer) {
                 gridContainer.style.gridTemplateColumns = '1fr';
@@ -384,7 +378,6 @@ function showTextInput(rect) {
             }
         }
 
-        // Ajustement des boutons pour petits écrans
         const buttonContainer = textInputBox.querySelector('div[style*="justify-content: flex-end"]');
         if (buttonContainer) {
             if (boxWidth < 350) {
@@ -396,25 +389,21 @@ function showTextInput(rect) {
             }
         }
 
-        // Mise à jour de la prévisualisation avec les nouvelles dimensions
         updateTextPreview();
     }
 
-    // Mise à jour de la prévisualisation du texte
     function updateTextPreview() {
         const text = textInput.value;
         const previewMaxWidth = textInputBox.clientWidth - 60;
-        
-        // Mise à jour du compteur de caractères
+
         charCount.textContent = `${text.length}/500`;
         charCount.style.color = text.length > 450 ? '#ff6b6b' : text.length > 400 ? '#ffa726' : '#888';
-        
-        // Mise à jour de l'apparence de la prévisualisation
+
         textPreview.style.color = textColor;
         textPreview.style.fontSize = fontSize + 'px';
         textPreview.style.fontFamily = fontFamily;
         textPreview.style.fontStyle = 'normal';
-        
+
         if (text.trim() === '') {
             textPreview.innerHTML = 'Your formatted text will appear here...';
             textPreview.style.color = '#888';
@@ -422,13 +411,11 @@ function showTextInput(rect) {
             lineCount.textContent = 'Lines: 0';
         } else {
             textPreview.innerHTML = '';
-            
-            // Simulation du rendu avec retours à la ligne et formatage Markdown
+
             const tempCanvas = document.createElement('canvas');
             const tempCtx = tempCanvas.getContext('2d');
             tempCtx.font = `${fontSize}px ${fontFamily}`;
-            
-            // Parsing Markdown pour créer des segments formatés
+
             function parseMarkdownForPreview(text) {
                 const segments = [];
                 let currentText = '';
@@ -438,10 +425,9 @@ function showTextInput(rect) {
                     underline: false,
                     strikethrough: false
                 };
-                
+
                 let i = 0;
                 while (i < text.length) {
-                    // Vérification du gras **text**
                     if (text.substr(i, 2) === '**' && !currentStyles.bold) {
                         if (currentText) {
                             segments.push({ text: currentText, styles: { ...currentStyles } });
@@ -456,10 +442,9 @@ function showTextInput(rect) {
                         }
                         currentStyles.bold = false;
                         i += 2;
-                    } 
-                    // Vérification de l'italique *text*
-                    else if (text.substr(i, 1) === '*' && !currentStyles.italic && 
-                             (i === text.length - 1 || text[i + 1] !== '*')) {
+                    }
+                    else if (text.substr(i, 1) === '*' && !currentStyles.italic &&
+                        (i === text.length - 1 || text[i + 1] !== '*')) {
                         if (currentText) {
                             segments.push({ text: currentText, styles: { ...currentStyles } });
                             currentText = '';
@@ -467,15 +452,14 @@ function showTextInput(rect) {
                         currentStyles.italic = true;
                         i += 1;
                     } else if (text.substr(i, 1) === '*' && currentStyles.italic &&
-                               (i === text.length - 1 || text[i + 1] !== '*')) {
+                        (i === text.length - 1 || text[i + 1] !== '*')) {
                         if (currentText) {
                             segments.push({ text: currentText, styles: { ...currentStyles } });
                             currentText = '';
                         }
                         currentStyles.italic = false;
                         i += 1;
-                    } 
-                    // Vérification du soulignement __text__
+                    }
                     else if (text.substr(i, 2) === '__' && !currentStyles.underline) {
                         if (currentText) {
                             segments.push({ text: currentText, styles: { ...currentStyles } });
@@ -490,9 +474,7 @@ function showTextInput(rect) {
                         }
                         currentStyles.underline = false;
                         i += 2;
-                    }
-                    // Vérification du barré ~~text~~
-                    else if (text.substr(i, 2) === '~~' && !currentStyles.strikethrough) {
+                    } else if (text.substr(i, 2) === '~~' && !currentStyles.strikethrough) {
                         if (currentText) {
                             segments.push({ text: currentText, styles: { ...currentStyles } });
                             currentText = '';
@@ -511,70 +493,65 @@ function showTextInput(rect) {
                         i++;
                     }
                 }
-                
+
                 if (currentText) {
                     segments.push({ text: currentText, styles: { ...currentStyles } });
                 }
-                
+
                 return segments;
             }
-            
-            // Traitement de chaque ligne
+
             const lines = text.split('\n');
             const wrappedLines = [];
             const previewHeight = textPreview.clientHeight;
             const maxLines = Math.floor(previewHeight / (fontSize * 1.4));
-            
-            // Calcul des retours à la ligne avec segments formatés
+
             lines.forEach(line => {
                 const segments = parseMarkdownForPreview(line);
                 let currentLine = [];
                 let currentLineWidth = 0;
-                
+
                 segments.forEach(segment => {
                     const words = segment.text.split(' ');
-                    
+
                     words.forEach((word, wordIndex) => {
                         const wordWithSpace = wordIndex === words.length - 1 ? word : word + ' ';
                         const wordWidth = measureTextWidth(wordWithSpace, segment.styles);
-                        
+
                         if (currentLineWidth + wordWidth > previewMaxWidth && currentLine.length > 0) {
-                            // Nouvelle ligne
                             wrappedLines.push([...currentLine]);
                             currentLine = [];
                             currentLineWidth = 0;
                         }
-                        
-                        currentLine.push({ 
-                            text: wordWithSpace, 
-                            styles: segment.styles 
+
+                        currentLine.push({
+                            text: wordWithSpace,
+                            styles: segment.styles
                         });
                         currentLineWidth += wordWidth;
                     });
                 });
-                
+
                 if (currentLine.length > 0) {
                     wrappedLines.push(currentLine);
                 }
             });
-            
-            // Fonction pour mesurer la largeur du texte avec styles
+
             function measureTextWidth(text, styles) {
                 const tempCanvas = document.createElement('canvas');
                 const tempCtx = tempCanvas.getContext('2d');
-                
+
                 let fontString = '';
                 if (styles.bold) fontString += 'bold ';
                 if (styles.italic) fontString += 'italic ';
                 fontString += `${fontSize}px ${fontFamily}`;
-                
+
                 tempCtx.font = fontString;
                 return tempCtx.measureText(text).width;
             }
-            
-            // Affichage des lignes avec limite de hauteur
+
             const displayLines = wrappedLines.slice(0, maxLines);
-            
+
             displayLines.forEach(lineSegments => {
                 const lineElement = document.createElement('div');
                 lineElement.style.marginBottom = '2px';
@@ -583,27 +560,25 @@ function showTextInput(rect) {
                 lineElement.style.fontSize = fontSize + 'px';
                 lineElement.style.lineHeight = '1.4';
                 lineElement.style.fontStyle = 'normal';
-                
+
                 lineSegments.forEach(segment => {
                     const span = document.createElement('span');
                     span.textContent = segment.text;
                     span.style.fontWeight = segment.styles.bold ? 'bold' : 'normal';
                     span.style.fontStyle = segment.styles.italic ? 'italic' : 'normal';
-                    span.style.textDecoration = segment.styles.underline ? 
-                        (segment.styles.strikethrough ? 'underline line-through' : 'underline') : 
+                    span.style.textDecoration = segment.styles.underline ?
+                        (segment.styles.strikethrough ? 'underline line-through' : 'underline') :
                         (segment.styles.strikethrough ? 'line-through' : 'none');
                     span.style.color = textColor;
-                    
+
                     lineElement.appendChild(span);
                 });
-                
+
                 textPreview.appendChild(lineElement);
             });
-            
-            // Mise à jour du compteur de lignes
+
             lineCount.textContent = `Lines: ${displayLines.length}${wrappedLines.length > maxLines ? '+' : ''}`;
-            
-            // Avertissement si le texte dépasse la hauteur
+
             if (wrappedLines.length > maxLines) {
                 const warning = document.createElement('div');
                 warning.textContent = `... (${wrappedLines.length - maxLines} more lines won't fit)`;
@@ -616,13 +591,12 @@ function showTextInput(rect) {
         }
     }
 
-    // Événements pour les contrôles de texte
     textColorInput.addEventListener("input", e => {
         textColor = e.target.value;
         saveSettings();
         updateTextPreview();
     });
-    
+
     fontSizeInput.addEventListener("input", e => {
         let val = parseInt(e.target.value);
         if (!isNaN(val) && val >= 8 && val <= 72) {
@@ -631,29 +605,26 @@ function showTextInput(rect) {
             updateTextPreview();
         }
     });
-    
+
     fontFamilySelect.addEventListener("change", e => {
         fontFamily = e.target.value;
         saveSettings();
         updateTextPreview();
     });
-    
-    // Événements pour la saisie de texte
+
     textInput.addEventListener("input", updateTextPreview);
-    
-    // Mise à jour du layout au redimensionnement
+
     const resizeObserver = new ResizeObserver(updateLayout);
     resizeObserver.observe(textInputBox);
-    
-    // Mise à jour initiale du layout
+
     updateLayout();
-    
+
     textInputBox.querySelector("#cancelText").addEventListener("click", () => {
         resizeObserver.disconnect();
         textInputOverlay.remove();
         startTextAreaSelection();
     });
-    
+
     textInputBox.querySelector("#confirmText").addEventListener("click", () => {
         const text = textInput.value.trim();
         if (text) {
@@ -662,8 +633,8 @@ function showTextInput(rect) {
         resizeObserver.disconnect();
         textInputOverlay.remove();
     });
-    
-    // Fermeture avec ESC
+
+
     textInputOverlay.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             resizeObserver.disconnect();
@@ -672,7 +643,6 @@ function showTextInput(rect) {
         }
     });
 
-    // Assurer que la boîte de dialogue est scrollable et redimensionnable
     setTimeout(() => {
         textInputBox.style.overflow = 'auto';
         textInputBox.style.resize = 'both';
@@ -681,19 +651,16 @@ function showTextInput(rect) {
 
 function drawTextOnCanvas(text, rect) {
     if (!ctx) return;
-    
-    // Réinitialisation des styles par défaut
+
     ctx.fillStyle = textColor;
     ctx.font = `${fontSize}px ${fontFamily}`;
     ctx.textBaseline = "top";
-    
-    // Calcul du positionnement du texte dans la zone
+
     const lines = text.split('\n');
     const lineHeight = fontSize * 1.4;
     const maxWidth = rect.width - 10;
     const maxHeight = rect.height - 10;
-    
-    // Fonction pour parser le formatage Markdown
+
     function parseMarkdownText(text) {
         const segments = [];
         let currentText = '';
@@ -702,10 +669,9 @@ function drawTextOnCanvas(text, rect) {
             italic: false,
             underline: false
         };
-        
+
         let i = 0;
         while (i < text.length) {
-            // Vérification du gras **text**
             if (text.substr(i, 2) === '**' && !currentStyles.bold) {
                 if (currentText) {
                     segments.push({ text: currentText, styles: { ...currentStyles } });
@@ -720,10 +686,9 @@ function drawTextOnCanvas(text, rect) {
                 }
                 currentStyles.bold = false;
                 i += 2;
-            } 
-            // Vérification de l'italique *text*
-            else if (text.substr(i, 1) === '*' && !currentStyles.italic && 
-                     (i === text.length - 1 || text[i + 1] !== '*')) {
+            }
+            else if (text.substr(i, 1) === '*' && !currentStyles.italic &&
+                (i === text.length - 1 || text[i + 1] !== '*')) {
                 if (currentText) {
                     segments.push({ text: currentText, styles: { ...currentStyles } });
                     currentText = '';
@@ -731,16 +696,14 @@ function drawTextOnCanvas(text, rect) {
                 currentStyles.italic = true;
                 i += 1;
             } else if (text.substr(i, 1) === '*' && currentStyles.italic &&
-                       (i === text.length - 1 || text[i + 1] !== '*')) {
+                (i === text.length - 1 || text[i + 1] !== '*')) {
                 if (currentText) {
                     segments.push({ text: currentText, styles: { ...currentStyles } });
                     currentText = '';
                 }
                 currentStyles.italic = false;
                 i += 1;
-            } 
-            // Vérification du soulignement __text__
-            else if (text.substr(i, 2) === '__' && !currentStyles.underline) {
+            } else if (text.substr(i, 2) === '__' && !currentStyles.underline) {
                 if (currentText) {
                     segments.push({ text: currentText, styles: { ...currentStyles } });
                     currentText = '';
@@ -754,48 +717,57 @@ function drawTextOnCanvas(text, rect) {
                 }
                 currentStyles.underline = false;
                 i += 2;
+            } else if (text.substr(i, 2) === '~~' && !currentStyles.strikethrough) {
+                if (currentText) {
+                    segments.push({ text: currentText, styles: { ...currentStyles } });
+                    currentText = '';
+                }
+                currentStyles.strikethrough = true;
+                i += 2;
+            } else if (text.substr(i, 2) === '~~' && currentStyles.strikethrough) {
+                if (currentText) {
+                    segments.push({ text: currentText, styles: { ...currentStyles } });
+                    currentText = '';
+                }
+                currentStyles.strikethrough = false;
+                i += 2;
             } else {
                 currentText += text[i];
                 i++;
             }
         }
-        
+
         if (currentText) {
             segments.push({ text: currentText, styles: { ...currentStyles } });
         }
-        
+
         return segments;
     }
-    
-    // Fonction pour mesurer la largeur du texte avec styles
+
     function measureTextWidth(text, styles) {
         const tempCanvas = document.createElement('canvas');
         const tempCtx = tempCanvas.getContext('2d');
-        
+
         let fontString = '';
         if (styles.bold) fontString += 'bold ';
         if (styles.italic) fontString += 'italic ';
         fontString += `${fontSize}px ${fontFamily}`;
-        
+
         tempCtx.font = fontString;
         return tempCtx.measureText(text).width;
     }
-    
-    // Fonction pour dessiner un segment de texte avec ses styles
+
     function drawTextSegment(text, x, y, styles) {
-        // Application des styles
         let fontString = '';
         if (styles.bold) fontString += 'bold ';
         if (styles.italic) fontString += 'italic ';
         fontString += `${fontSize}px ${fontFamily}`;
-        
+
         ctx.font = fontString;
         ctx.fillStyle = textColor;
-        
-        // Dessin du texte
+
         ctx.fillText(text, x, y);
-        
-        // Dessin du soulignement si nécessaire
+
         if (styles.underline) {
             const textWidth = measureTextWidth(text, styles);
             ctx.strokeStyle = textColor;
@@ -805,74 +777,70 @@ function drawTextOnCanvas(text, rect) {
             ctx.lineTo(x + textWidth, y + fontSize + 2);
             ctx.stroke();
         }
-        
+
         return measureTextWidth(text, styles);
     }
-    
-    // Traitement de chaque ligne
+
     const allLines = [];
-    
+
     lines.forEach(line => {
         if (line.trim() === '') {
             allLines.push([{ text: '', styles: { bold: false, italic: false, underline: false } }]);
             return;
         }
-        
+
         const segments = parseMarkdownText(line);
         const lineSegments = [];
         let currentLine = [];
         let currentLineWidth = 0;
-        
+
         segments.forEach(segment => {
             const words = segment.text.split(' ');
-            
+
             words.forEach((word, wordIndex) => {
                 const wordWithSpace = wordIndex === words.length - 1 ? word : word + ' ';
                 const wordWidth = measureTextWidth(wordWithSpace, segment.styles);
-                
+
                 if (currentLineWidth + wordWidth > maxWidth && currentLine.length > 0) {
-                    // Nouvelle ligne
                     lineSegments.push([...currentLine]);
                     currentLine = [];
                     currentLineWidth = 0;
                 }
-                
-                currentLine.push({ 
-                    text: wordWithSpace, 
-                    styles: segment.styles 
+
+                currentLine.push({
+                    text: wordWithSpace,
+                    styles: segment.styles
                 });
                 currentLineWidth += wordWidth;
             });
         });
-        
+
         if (currentLine.length > 0) {
             lineSegments.push(currentLine);
         }
-        
+
         allLines.push(...lineSegments);
     });
-    
-    // Limite du nombre de lignes selon la hauteur disponible
+
     const maxLines = Math.floor(maxHeight / lineHeight);
     const finalLines = allLines.slice(0, maxLines);
-    
-    // Dessin du texte
+
     const startX = rect.left + 5;
     let startY = rect.top + 5;
-    
+
     finalLines.forEach(lineSegments => {
         if (startY + lineHeight > rect.bottom) return;
-        
+
         let currentX = startX;
-        
+
         lineSegments.forEach(segment => {
             const segmentWidth = drawTextSegment(segment.text, currentX, startY, segment.styles);
             currentX += segmentWidth;
         });
-        
+
         startY += lineHeight;
     });
-    
+
     saveDrawing();
     console.log(`[GRAFOS] Formatted text added to canvas: ${finalLines.length} lines`);
 }
