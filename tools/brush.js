@@ -34,7 +34,6 @@ function createBrushPreview() {
         position: fixed;
         pointer-events: none;
         z-index: 100000;
-        mix-blend-mode: difference;
         opacity: 0.8;
         display: none;
     `;
