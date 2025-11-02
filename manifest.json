@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Grafos",
-  "version": "1.4",
+  "version": "1.4.1",
   "description": "Drawing on web pages",
   "author": "liveweeeb",
   "permissions": ["storage", "activeTab"],
