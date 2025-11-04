@@ -13,11 +13,11 @@
 3. Drag and drop the **.crx** file onto the extensions page.
 4. Click **Install** to confirm.
 
-### For Firefox (add to each launch)
+### For Firefox 
 
-1. Download the **.xpi** file from the [latest release](https://github.com/liveweeeb13/Grafos/releases).
-2. Go to `about:debugging#/runtime/this-firefox`.
-3. Click **Load Temporary Add-on** and select the **.xpi** file.
+1. Go to [the Mozilla Add-ons page](https://addons.mozilla.org/fr/firefox/addon/grafos)
+2. Click **Add to Firefox**
+3. Click **Add**
 
 
 ---
