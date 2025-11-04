@@ -24,6 +24,8 @@
 
 ## Settings
 
+Default **keyboard shortcut** is ``Ctrl+Alt+P``
+
 You can customize the **keyboard shortcut** and the **maximum brush size**.
 
 ---
